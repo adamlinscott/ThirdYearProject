@@ -1,0 +1,395 @@
+{
+	"total_weeks":23,
+	"start_date":"2016-04-17 00:00:00",
+	"bank_hols":[
+		"2016-05-02 00:00:00",
+		"2016-05-30 00:00:00",
+		"2016-08-29 00:00:00"
+	],
+	"Division 1":{
+		"start_week":4,
+		"team_num":10,
+		"teams":[
+			{
+				"num":1,
+				"name":Balderton 1,
+			},
+			{
+				"num":2,
+				"name":Caythorpe,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":3,
+				"name":Collingham 1,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":4,
+				"name":Forrest Green Youth,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":5,
+				"name":Madni,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":6,
+				"name":Pakistan CC,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":7,
+				"name":Pakistan CCC,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":8,
+				"name":Plumtree 1,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":9,
+				"name":Thurgaton,
+				"requirements":{,
+				}
+				"grounds":,
+			}
+	},
+	"Division 2":{
+		"start_week":4,
+		"team_num":10,
+		"teams":[
+			{
+				"num":1,
+				"name":Attenborough,
+			},
+			{
+				"num":2,
+				"name":Calverton,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":3,
+				"name":Chiwell 1,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":4,
+				"name":Clumber Park,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":5,
+				"name":Gedling Colliery 1,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":6,
+				"name":Hoveringham,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":7,
+				"name":Pakistan Kashmir,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":8,
+				"name":Radcliffe on Trent,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":9,
+				"name":Rainbow 1,
+				"requirements":{,
+				}
+				"grounds":,
+			}
+	},
+	"Division 3":{
+		"start_week":6,
+		"team_num":8,
+		"teams":[
+			{
+				"num":1,
+				"name":Colston Bassett,
+			},
+			{
+				"num":2,
+				"name":Ellerslie,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":3,
+				"name":Fiskerton,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":4,
+				"name":Long Eaton,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":5,
+				"name":Newark R&M,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":6,
+				"name":Notts & Arnold Ams 1,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":7,
+				"name":Wilsons,
+				"requirements":{,
+				}
+				"grounds":,
+			}
+	},
+	"Division 4":{
+		"start_week":6,
+		"team_num":8,
+		"teams":[
+			{
+				"num":1,
+				"name":Beeston & Toton Sycamore,
+			},
+			{
+				"num":2,
+				"name":Burton Joyce,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":3,
+				"name":Lowdham,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":4,
+				"name":Gedling Colliery 2,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":5,
+				"name":Notts & Arnold Ams 2,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":6,
+				"name":Oxton,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":7,
+				"name":Plumtree 2,
+				"requirements":{,
+				}
+				"grounds":,
+			}
+	},
+	"Division 5":{
+		"start_week":6,
+		"team_num":8,
+		"teams":[
+			{
+				"num":1,
+				"name":Farndon,
+			},
+			{
+				"num":2,
+				"name":Keyworth,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":3,
+				"name":Nottingham Masters,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":4,
+				"name":Ruddington,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":5,
+				"name":Sandiacre Town,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":6,
+				"name":Shipley Hall,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":7,
+				"name":Southwell,
+				"requirements":{,
+				}
+				"grounds":,
+			}
+	},
+	"Division 6":{
+		"start_week":6,
+		"team_num":8,
+		"teams":[
+			{
+				"num":1,
+				"name":Balderton 2,
+			},
+			{
+				"num":2,
+				"name":Basford Mill,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":3,
+				"name":Chilwell 2,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":4,
+				"name":Collingham 2,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":5,
+				"name":Heanor Town,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":6,
+				"name":Wellow Exiles,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":7,
+				"name":West Bridgfordians 2,
+				"requirements":{,
+				}
+				"grounds":,
+			}
+	},
+	"Division 7":{
+		"start_week":6,
+		"team_num":8,
+		"teams":[
+			{
+				"num":1,
+				"name":Gedling & Sherwood,
+			},
+			{
+				"num":2,
+				"name":Notts & Arnold Ams 3,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":3,
+				"name":Rainbow 2,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":4,
+				"name":Sawley & Long Eaton Park,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":5,
+				"name":Thurgaton 2,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":6,
+				"name":Walesby,
+				"requirements":{,
+				}
+				"grounds":,
+			},
+			{
+				"num":7,
+				"name":Thrumpton,
+				"requirements":{,
+				}
+				"grounds":,
+			}
+	},
+	"file_parsed":true
+}
