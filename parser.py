@@ -52,6 +52,7 @@ else:
 #loop to read data per division
 for name in sheetNames:
 	ws = wb[name] 
+	name = name.replace(" ", "_")
 	#open division object
 	jsonFile.write('\t"' + name + '":{\n')
 	
