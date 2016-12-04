@@ -2,6 +2,7 @@ import openpyxl
 from openpyxl import load_workbook
 from datetime import datetime
 from string import ascii_uppercase
+import os
 
 wb = load_workbook('xl.xlsx')
 sheetNames = wb.get_sheet_names()
@@ -78,26 +79,41 @@ for name in sheetNames:
 	
 	jsonFile.write('\t\t\t{\n')
 	jsonFile.write('\t\t\t\t"num":1,\n')
-	jsonFile.write('\t\t\t\t"name":' + ws[str(unichr(ord(teamInfoZeroIndex)+1)) + "2"].value + ',\n') 
+	jsonFile.write('\t\t\t\t"name":"' + ws[str(unichr(ord(teamInfoZeroIndex)+1)) + "2"].value + '",\n') 
+	
+	jsonFile.write('\t\t\t\t"requirements":{') 
+	isRequirements = False
+	for j in range(2, totalWeeks+1):
+		if isinstance(ws[unichr(ord('C') + 1) + str(j)].value, unicode):
+			if isinstance(ws['A' + str(j)].value, long):
+				isRequirements = True
+				jsonFile.write('\n\t\t\t\t\t"' + str(ws['A' + str(j)].value) + '":"' + str(ws[unichr(ord('C') + 1) + str(j)].value) + '",')
+	jsonFile.write('\n\t\t\t\t\t"bank_hols":{\n')
+	jsonFile.write('\t\t\t\t\t}\n')
+	jsonFile.write('\t\t\t\t},\n')
+	jsonFile.write('\t\t\t\t"grounds":' + "null" + '\n') #Must change when implementing ground sharing conditions
 				
 	jsonFile.write('\t\t\t}')
 	
 	for i in range(2, numOfTeams):
 		jsonFile.write(',\n\t\t\t{\n')
 		jsonFile.write('\t\t\t\t"num":' + str(i) + ',\n')
-		jsonFile.write('\t\t\t\t"name":' + ws[str(unichr(ord(teamInfoZeroIndex)+1)) + str(i+1)].value + ',\n') 
-		jsonFile.write('\t\t\t\t"requirements":{,\n') 
+		jsonFile.write('\t\t\t\t"name":"' + ws[str(unichr(ord(teamInfoZeroIndex)+1)) + str(i+1)].value + '",\n') 
+		jsonFile.write('\t\t\t\t"requirements":{') 
+		isRequirements = False
 		for j in range(2, totalWeeks+1):
-			if isinstance(ws['D' + str(j)].value, unicode):
-				if type(ws['A' + str(j)].value) == long():
-					jsonFile.write('\t\t\t\t\t"' + str(ws['A' + str(j)].value) + '":' + str(ws['D' + str(j)].value) + ',\n')
-		jsonFile.write('\t\t\t\t}\n')
-		jsonFile.write('\t\t\t\t"grounds":' + ',\n')
+			if isinstance(ws[unichr(ord('C') + i) + str(j)].value, unicode):
+				if isinstance(ws['A' + str(j)].value, long):
+					isRequirements = True
+					jsonFile.write('\n\t\t\t\t\t"' + str(ws['A' + str(j)].value) + '":"' + str(ws[unichr(ord('C') + i) + str(j)].value) + '",')
+		jsonFile.write('\n\t\t\t\t\t"bank_hols":{\n')
+		jsonFile.write('\t\t\t\t\t}\n')
+		jsonFile.write('\t\t\t\t},\n')
+		jsonFile.write('\t\t\t\t"grounds":' + "null" + '\n') #Must change when implementing ground sharing conditions
 		jsonFile.write('\t\t\t}')
-
-	
+	jsonFile.write('\n\t\t]\n')
 	#close division object
-	jsonFile.write('\n\t},\n')
+	jsonFile.write('\t},\n')
 #end of name in sheetNames for loop
 
 
