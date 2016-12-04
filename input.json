@@ -6,7 +6,7 @@
 		"2016-05-30 00:00:00",
 		"2016-08-29 00:00:00"
 	],
-	"Division 1":{
+	"Division_1":{
 		"start_week":4,
 		"team_num":10,
 		"teams":[
@@ -120,7 +120,7 @@
 			}
 		]
 	},
-	"Division 2":{
+	"Division_2":{
 		"start_week":4,
 		"team_num":10,
 		"teams":[
@@ -272,7 +272,7 @@
 			}
 		]
 	},
-	"Division 3":{
+	"Division_3":{
 		"start_week":6,
 		"team_num":8,
 		"teams":[
@@ -361,7 +361,7 @@
 			}
 		]
 	},
-	"Division 4":{
+	"Division_4":{
 		"start_week":6,
 		"team_num":8,
 		"teams":[
@@ -461,7 +461,7 @@
 			}
 		]
 	},
-	"Division 5":{
+	"Division_5":{
 		"start_week":6,
 		"team_num":8,
 		"teams":[
@@ -567,7 +567,7 @@
 			}
 		]
 	},
-	"Division 6":{
+	"Division_6":{
 		"start_week":6,
 		"team_num":8,
 		"teams":[
@@ -707,7 +707,7 @@
 			}
 		]
 	},
-	"Division 7":{
+	"Division_7":{
 		"start_week":6,
 		"team_num":8,
 		"teams":[
