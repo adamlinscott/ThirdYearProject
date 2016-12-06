@@ -8,5 +8,16 @@ namespace TimeTableCalculator
 {
 	class Division
 	{
+		private Division* nextDivision;
+
+		public void Division(Object divisionInfo, Division* nextDivision)
+		{
+			this.nextDivision = nextDivision;
+		}
+
+		public void Division(Object divisionInfo)
+		{
+
+		}
 	}
 }
