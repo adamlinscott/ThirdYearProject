@@ -46,7 +46,8 @@ namespace TimeTableCalculator
 
 		public int[,] roundRobbin()
 		{
-			int[,] table = new int[2*teams.Length,teams.Length];
+			int[,] opponentTable = new int[2*teams.Length,teams.Length];
+			bool[,] homeTable = new bool[2 * teams.Length, teams.Length];
 
 			// write heading of table
 			Console.Write("Teams ");
@@ -75,26 +76,35 @@ namespace TimeTableCalculator
 
 				for(int pair = teams.Length / 2; pair > 0; pair--)
 				{
-					table[week, (pair + teams.Length - 1 + week) % teams.Length] = teams[teams.Length - pair].id;
-					table[week, ((2*teams.Length) - pair + week) % teams.Length] = teams[pair-1].id;
+					opponentTable[week, (pair + teams.Length - 1 + week) % teams.Length] = teams[teams.Length - pair].id;
+					opponentTable[week, ((2*teams.Length) - pair + week) % teams.Length] = teams[pair-1].id;
+					if(week < teams.Length)
+					{
+						homeTable[week, (pair + teams.Length - 1 + week) % teams.Length] = true;
+						homeTable[week, ((2 * teams.Length) - pair + week) % teams.Length] = false;
+					} 
+					else
+					{
+						homeTable[week, (pair + teams.Length - 1 + week) % teams.Length] = false;
+						homeTable[week, ((2 * teams.Length) - pair + week) % teams.Length] = true;
+					}
 				}
 
 				// print line of week to console
-				for(int i = 0; i < teams.Length; i++)
+				for (int i = 0; i < teams.Length; i++)
 				{
-					//TODO: HOME/AWAY NEEDS CHANGING, NOT CORRECT
-					if (week < teams.Length)
+					if (homeTable[week, i])
 						Console.Write("H");
 					else
 						Console.Write("A");
-					Console.Write(table[week, i] + "|");
+					Console.Write(opponentTable[week, i] + "|");
 				}
 				Console.Write("\n");
 
 				//rotateArray();
 			}
 
-			return table;
+			return opponentTable;
 		}
 	}
 }
