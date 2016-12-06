@@ -41,9 +41,9 @@ namespace TimeTableCalculator
 			{
 				bankHolidays[i] = ConvertDate(JSONObject.bank_hols[i]);
 			}
-
-			
-
+			// Cerate object for first division
+			Division div1 = new Division(JSONObject.Division_1);
+			div1.roundRobbin();
 			Console.ReadKey();
 		}
 	}
