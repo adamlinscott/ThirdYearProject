@@ -46,39 +46,51 @@ namespace TimeTableCalculator
 
 		public int[,] roundRobbin()
 		{
-			int[,] table = new int[teams.Length,teams.Length];
+			int[,] table = new int[2*teams.Length,teams.Length];
 
 			// write heading of table
 			Console.Write("Teams ");
-			for (int i = 0; i < teams.Length / 10; i++)
+			for (int i = 0; i < teams.Length*2 / 10; i++)
 				Console.Write(" ");
 			Console.Write("||");
 			for (int i = 0; i < teams.Length; i++)
-				Console.Write((i+1) + "|");
+				Console.Write((i+1) + " |");
 			Console.WriteLine();
-			for (int i = 0; i < teams.Length / 10; i++)
+			for (int i = 0; i < teams.Length*2 / 10; i++)
 				Console.Write("-");
 			for (int i = 0; i < teams.Length; i++)
-				Console.Write("--");
+				Console.Write("---");
 			Console.WriteLine("--------");
 
 
 			// for each week that teams play
-			for (int week = 0; week < teams.Length; week++)
+			for (int week = 0; week < teams.Length*2; week++)
 			{
-				Console.Write("Week " + (week+1) + "||");
+				//y axis label
+				Console.Write("Week ");
+				for (int i = 0; i < (teams.Length*2 / 10) - ((week+1)/10); i++)
+					Console.Write(" ");
+				Console.Write((week+1) + "||");
+
+
 				for(int pair = teams.Length / 2; pair > 0; pair--)
 				{
 					table[week, (pair + teams.Length - 1 + week) % teams.Length] = teams[teams.Length - pair].id;
-					table[week, ((2*teams.Length) - pair + week) % teams.Length] = teams[pair].id;
+					table[week, ((2*teams.Length) - pair + week) % teams.Length] = teams[pair-1].id;
 				}
 
 				// print line of week to console
 				for(int i = 0; i < teams.Length; i++)
 				{
+					//TODO: HOME/AWAY NEEDS CHANGING, NOT CORRECT
+					if (week < teams.Length)
+						Console.Write("H");
+					else
+						Console.Write("A");
 					Console.Write(table[week, i] + "|");
 				}
 				Console.Write("\n");
+
 				//rotateArray();
 			}
 
