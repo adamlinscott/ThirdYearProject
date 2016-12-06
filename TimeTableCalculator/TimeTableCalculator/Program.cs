@@ -11,6 +11,7 @@ namespace TimeTableCalculator
 {
 	class Program
 	{
+		
 		static void Main(string[] args)
 		{
 			// Get the current directory.
@@ -19,6 +20,8 @@ namespace TimeTableCalculator
 
 			string JSONString = System.IO.File.ReadAllText(path + @"input.json");
 			var JSONObject = JsonParser.Deserialize(JSONString);
+
+			Console.WriteLine(JSONObject.Division_1.start_week);
 
 			Console.ReadKey();
 		}
