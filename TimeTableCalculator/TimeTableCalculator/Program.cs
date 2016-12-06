@@ -27,7 +27,6 @@ namespace TimeTableCalculator
 		{
 			// Get the current directory.
 			string path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\"));
-			Console.WriteLine("Current dir: " + path);
 
 			// Convert JSON file to dynamic C# object
 			string JSONString = System.IO.File.ReadAllText(path + @"input.json");

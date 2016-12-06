@@ -56,16 +56,21 @@ namespace TimeTableCalculator
 			for (int i = 0; i < teams.Length; i++)
 				Console.Write((i+1) + "|");
 			Console.WriteLine();
+			for (int i = 0; i < teams.Length / 10; i++)
+				Console.Write("-");
+			for (int i = 0; i < teams.Length; i++)
+				Console.Write("--");
+			Console.WriteLine("--------");
 
 
 			// for each week that teams play
 			for (int week = 0; week < teams.Length; week++)
 			{
-				Console.Write("Week " + week + "||");
+				Console.Write("Week " + (week+1) + "||");
 				for(int pair = teams.Length / 2; pair > 0; pair--)
 				{
-					table[week, pair - 1] = teams[teams.Length - pair].id;
-					table[week, teams.Length - pair] = teams[pair].id;
+					table[week, (pair + teams.Length - 1 + week) % teams.Length] = teams[teams.Length - pair].id;
+					table[week, ((2*teams.Length) - pair + week) % teams.Length] = teams[pair].id;
 				}
 
 				// print line of week to console
@@ -74,7 +79,7 @@ namespace TimeTableCalculator
 					Console.Write(table[week, i] + "|");
 				}
 				Console.Write("\n");
-				rotateArray();
+				//rotateArray();
 			}
 
 			return table;
