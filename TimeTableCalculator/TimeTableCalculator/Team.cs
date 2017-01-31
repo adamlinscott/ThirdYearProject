@@ -17,6 +17,10 @@ namespace TimeTableCalculator
 			id = (int) teamInfo["num"];
 			name = teamInfo["name"];
 			requirements = new string[Program.totalWeeks];
+			foreach (string s in requirements)
+			{
+				//note requirement
+			}
 		}
 	}
 }
