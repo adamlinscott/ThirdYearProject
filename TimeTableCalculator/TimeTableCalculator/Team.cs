@@ -21,7 +21,6 @@ namespace TimeTableCalculator
 			{
 				//note requirement
 				requirements[i] = teamInfo["requirements"][i];
-				Console.WriteLine(requirements[i]);
 			}
 		}
 	}

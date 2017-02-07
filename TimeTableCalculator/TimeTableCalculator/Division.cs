@@ -51,7 +51,7 @@ namespace TimeTableCalculator
 			// for each week that teams play
 			for (int week = 0; week < teams.Length * 2; week++)
 			{
-				Console.Write("-----------------------\nWeek " + (week + startWeek) + "\n-----------------------\n");
+				Console.Write("\n-----------------------\nWeek " + (week + startWeek) + "\n-----------------------\n");
 				// print line of week to console
 				for (int i = 0; i < teams.Length; i++)
 				{
@@ -149,18 +149,25 @@ namespace TimeTableCalculator
 					else if(opponentTable[week, i].requirements[week] != "None")
 					{
 						Console.ForegroundColor = ConsoleColor.Red;
-						Console.Write("XX");
-						Console.ResetColor();
+						if (homeTable[week, i])
+							Console.Write("H");
+						else
+							Console.Write("A");
 					}
 					else if (homeTable[week, i] )
 						Console.Write("H");
 					else
 						Console.Write("A");
 
-					if (opponentTable[week, i] != null && opponentTable[week, i].requirements[week] == "None")
-						Console.Write(opponentTable[week, i].id + "|");
+					if (opponentTable[week, i] != null)
+					{
+						Console.Write(opponentTable[week, i].id);
+						Console.ResetColor();
+						Console.Write("|");
+					}
 					else
 						Console.Write("|");
+
 				}
 				Console.Write("\n");
 
