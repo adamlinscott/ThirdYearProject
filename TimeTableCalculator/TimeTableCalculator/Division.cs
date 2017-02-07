@@ -12,6 +12,8 @@ namespace TimeTableCalculator
 		int startWeek;
 		int totalTeams;
 		Team[] teams;
+		Team[,] opponentTable;
+		bool[,] homeTable;
 
 		//private Division* nextDivision;
 
@@ -44,11 +46,44 @@ namespace TimeTableCalculator
 			teams[teams.Length - 1] = tempTeam;
 		}
 
-		public Team[,] roundRobbin()
+		public void validateSolution()
+		{
+			// for each week that teams play
+			for (int week = 0; week < teams.Length * 2; week++)
+			{
+				Console.Write("-----------------------\nWeek " + (week + startWeek) + "\n-----------------------\n");
+				// print line of week to console
+				for (int i = 0; i < teams.Length; i++)
+				{
+					if (opponentTable[week, i] == null)
+					{
+						Console.ForegroundColor = ConsoleColor.Blue;
+						Console.WriteLine("Team " + (i+1) + " does not play this week");
+						Console.ResetColor();
+					}
+					else if (opponentTable[week, i].requirements[week] != "None")
+					{
+						Console.ForegroundColor = ConsoleColor.Red;
+						Console.Write("Team " + (i+1) + " cannot play team " + opponentTable[week, i].id);
+						if (homeTable[week, i])
+							Console.WriteLine(" at Home");
+						else
+							Console.WriteLine(" Away");
+						Console.ResetColor();
+					}
+					else if (homeTable[week, i])
+						Console.WriteLine("Team " + (i + 1) + " plays team " + opponentTable[week, i].id + " at Home");
+					else
+						Console.WriteLine("Team " + (i + 1) + " plays team " + opponentTable[week, i].id + " Away");
+				}
+			}
+		}
+
+		public Division roundRobbin()
 		{
 			// tables of size teams by weeks
-			Team[,] opponentTable = new Team[2*teams.Length,teams.Length];
-			bool[,] homeTable = new bool[2 * teams.Length, teams.Length];
+			opponentTable = new Team[2*teams.Length,teams.Length];
+			homeTable = new bool[2 * teams.Length, teams.Length];
 
 			// write heading of table
 			Console.Write("Teams ");
@@ -70,9 +105,9 @@ namespace TimeTableCalculator
 			{
 				//y axis label
 				Console.Write("Week ");
-				for (int i = 0; i < (teams.Length*2 / 10) - ((week+1)/10); i++)
+				for (int i = 0; i < (teams.Length*2 / 10) - ((week+startWeek) /10); i++)
 					Console.Write(" ");
-				Console.Write((week+1) + "||");
+				Console.Write((week+startWeek) + "||");
 
 				Team[] weekPairings = new Team[teams.Length];
 				// for each pair of teams in week
@@ -105,14 +140,24 @@ namespace TimeTableCalculator
 				// print line of week to console
 				for (int i = 0; i < teams.Length; i++)
 				{
-					if (opponentTable[week, i] == null)
+					if (opponentTable[week, i] == null )
+					{
+						Console.ForegroundColor = ConsoleColor.Blue;
 						Console.Write("XX");
-					else if (homeTable[week, i])
+						Console.ResetColor();
+					}
+					else if(opponentTable[week, i].requirements[week] != "None")
+					{
+						Console.ForegroundColor = ConsoleColor.Red;
+						Console.Write("XX");
+						Console.ResetColor();
+					}
+					else if (homeTable[week, i] )
 						Console.Write("H");
 					else
 						Console.Write("A");
 
-					if (opponentTable[week, i] != null)
+					if (opponentTable[week, i] != null && opponentTable[week, i].requirements[week] == "None")
 						Console.Write(opponentTable[week, i].id + "|");
 					else
 						Console.Write("|");
@@ -123,7 +168,7 @@ namespace TimeTableCalculator
 				rotateArray();
 			}
 
-			return opponentTable;
+			return this;
 		}
 	}
 }

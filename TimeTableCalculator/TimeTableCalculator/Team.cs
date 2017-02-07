@@ -10,16 +10,18 @@ namespace TimeTableCalculator
 	{
 		public int id;
 		public string name;
-		string[] requirements;
+		public string[] requirements;
 
 		public Team(dynamic teamInfo)
 		{
 			id = (int) teamInfo["num"];
 			name = teamInfo["name"];
 			requirements = new string[Program.totalWeeks];
-			foreach (string s in requirements)
+			for(int i = 0; i < Program.totalWeeks; i++)
 			{
 				//note requirement
+				requirements[i] = teamInfo["requirements"][i];
+				Console.WriteLine(requirements[i]);
 			}
 		}
 	}

@@ -43,6 +43,7 @@ namespace TimeTableCalculator
 			// Cerate object for first division
 			Division div1 = new Division(JSONObject.Division_1);
 			div1.roundRobbin();
+			div1.validateSolution();
 			Console.ReadKey();
 		}
 	}
