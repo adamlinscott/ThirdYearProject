@@ -48,33 +48,68 @@ namespace TimeTableCalculator
 
 		public void validateSolution()
 		{
-			// for each week that teams play
-			for (int week = 0; week < teams.Length * 2; week++)
+
+			// full size table including overflow weeks
+			Team[,] newOpponentTable = new Team[Program.totalWeeks, teams.Length];
+			bool[,] newHomeTable = new bool[Program.totalWeeks, teams.Length];
+
+			// initilise first weeks to be empty
+			for(int week = 0; week < startWeek-1; week++)
 			{
-				Console.Write("\n-----------------------\nWeek " + (week + startWeek) + "\n-----------------------\n");
+				for (int t = 0; t < teams.Length; t++)
+				{
+					newOpponentTable[week, t] = null;
+					newHomeTable[week, t] = false;
+				}
+			}
+
+			// copy existing schedule
+			for (int week = startWeek; week < startWeek + ((teams.Length -1) * 2); week++)
+			{
+				for (int t = 0; t < teams.Length; t++)
+				{
+					newOpponentTable[week, t] = opponentTable[week-startWeek, t];
+					newHomeTable[week, t] = homeTable[week - startWeek, t];
+				}
+			}
+
+			// initilise last weeks to be empty
+			for (int week = startWeek + ((teams.Length-1) * 2); week < Program.totalWeeks; week++)
+			{
+				for (int t = 0; t < teams.Length; t++)
+				{
+					newOpponentTable[week, t] = null;
+					newHomeTable[week, t] = false;
+				}
+			}
+
+			// for each week that teams play
+			for (int week = 0; week < Program.totalWeeks; week++)
+			{
+				Console.Write("\n-----------------------\nWeek " + (week+1) + "\n-----------------------\n");
 				// print line of week to console
 				for (int i = 0; i < teams.Length; i++)
 				{
-					if (opponentTable[week, i] == null)
+					if (newOpponentTable[week, i] == null)
 					{
 						Console.ForegroundColor = ConsoleColor.Blue;
 						Console.WriteLine("Team " + (i+1) + " does not play this week");
 						Console.ResetColor();
 					}
-					else if (opponentTable[week, i].requirements[week] != "None")
+					else if (newOpponentTable[week, i].requirements[week] != "None")
 					{
 						Console.ForegroundColor = ConsoleColor.Red;
-						Console.Write("Team " + (i+1) + " cannot play team " + opponentTable[week, i].id);
-						if (homeTable[week, i])
+						Console.Write("Team " + (i+1) + " cannot play team " + newOpponentTable[week, i].id);
+						if (newHomeTable[week, i])
 							Console.WriteLine(" at Home");
 						else
 							Console.WriteLine(" Away");
 						Console.ResetColor();
 					}
-					else if (homeTable[week, i])
-						Console.WriteLine("Team " + (i + 1) + " plays team " + opponentTable[week, i].id + " at Home");
+					else if (newHomeTable[week, i])
+						Console.WriteLine("Team " + (i + 1) + " plays team " + newOpponentTable[week, i].id + " at Home");
 					else
-						Console.WriteLine("Team " + (i + 1) + " plays team " + opponentTable[week, i].id + " Away");
+						Console.WriteLine("Team " + (i + 1) + " plays team " + newOpponentTable[week, i].id + " Away");
 				}
 			}
 		}
