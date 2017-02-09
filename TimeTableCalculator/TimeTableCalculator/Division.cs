@@ -11,7 +11,9 @@ namespace TimeTableCalculator
 	{
 		int startWeek;
 		int totalTeams;
+		string name;
 		Team[] teams;
+		Team[] teamsInOrder;
 		Team[,] opponentTable;
 		bool[,] homeTable;
 
@@ -27,13 +29,15 @@ namespace TimeTableCalculator
 
 		public Division(dynamic divisionInfo)
 		{
-			startWeek = (int) divisionInfo.start_week;
-			totalTeams = (int) divisionInfo.team_num;
-			teams = new Team[divisionInfo.teams.Count];
-			for(int i = 0; i < divisionInfo.teams.Count; i++)
+			name = (string)divisionInfo["name"];
+			startWeek = (int) divisionInfo["start_week"];
+			totalTeams = (int) divisionInfo["team_num"];
+			teams = new Team[divisionInfo["teams"].Count];
+			for(int i = 0; i < divisionInfo["teams"].Count; i++)
 			{
-				teams[i] = new Team(divisionInfo.teams[i]);
+				teams[i] = new Team(divisionInfo["teams"][i]);
 			}
+			teamsInOrder = teams;
 		}
 
 		private void rotateArray()
@@ -96,7 +100,9 @@ namespace TimeTableCalculator
 						Console.WriteLine("Team " + (i+1) + " does not play this week");
 						Console.ResetColor();
 					}
-					else if (newOpponentTable[week, i].requirements[week] != "None")
+					else if (teamsInOrder[i].requirements[week] != "None" &&
+								((newHomeTable[week, i] && !teamsInOrder[i].requirements[week].Contains("H")) ||
+								(!newHomeTable[week, i] && !teamsInOrder[i].requirements[week].Contains("A"))) )
 					{
 						Console.ForegroundColor = ConsoleColor.Red;
 						Console.Write("Team " + (i+1) + " cannot play team " + newOpponentTable[week, i].id);
@@ -140,7 +146,9 @@ namespace TimeTableCalculator
 			{
 				//y axis label
 				Console.Write("Week ");
-				for (int i = 0; i < (teams.Length*2 / 10) - ((week+startWeek) /10); i++)
+				for (int i = 0; i < (Math.Pow(teams.Length*2, 1/10)) - (Math.Pow(week+startWeek, 1/10)); i++)
+					Console.Write(" ");
+				if (week + startWeek < 10)
 					Console.Write(" ");
 				Console.Write((week+startWeek) + "||");
 
@@ -175,13 +183,15 @@ namespace TimeTableCalculator
 				// print line of week to console
 				for (int i = 0; i < teams.Length; i++)
 				{
-					if (opponentTable[week, i] == null )
+					if (teamsInOrder[i] == null )
 					{
 						Console.ForegroundColor = ConsoleColor.Blue;
 						Console.Write("XX");
 						Console.ResetColor();
 					}
-					else if(opponentTable[week, i].requirements[week] != "None")
+					else if(teams[i].requirements[week] != "None" &&
+								((homeTable[week, i] && !teamsInOrder[i].requirements[week].Contains("H")) ||
+								(!homeTable[week, i] && !teamsInOrder[i].requirements[week].Contains("A"))))
 					{
 						Console.ForegroundColor = ConsoleColor.Red;
 						if (homeTable[week, i])

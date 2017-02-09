@@ -6,7 +6,9 @@
 		"2016-05-30 00:00:00",
 		"2016-08-29 00:00:00"
 	],
-	"Division_1":{
+	"divisions":[
+	{
+		"name":"Division_1",
 		"start_week":4,
 		"team_num":10,
 		"teams":[
@@ -279,10 +281,41 @@
 					"None"
 				],
 				"grounds":null
+			},
+			{
+				"num":10,
+				"name":"Wollaton 1",
+				"requirements":[
+					"A",
+					"A",
+					"A",
+					"None",
+					"None",
+					"None",
+					"3  H",
+					"None",
+					"None",
+					"None",
+					"X",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"X",
+					"None",
+					"A",
+					"None"
+				],
+				"grounds":null
 			}
 		]
 	},
-	"Division_2":{
+	{
+		"name":"Division_2",
 		"start_week":4,
 		"team_num":10,
 		"teams":[
@@ -555,10 +588,41 @@
 					"None"
 				],
 				"grounds":null
+			},
+			{
+				"num":10,
+				"name":"West Bridgfordians 1",
+				"requirements":[
+					"A",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"X",
+					"None",
+					"None",
+					"None",
+					"None",
+					"X",
+					"None",
+					"X",
+					"None",
+					"None",
+					"None",
+					"None"
+				],
+				"grounds":null
 			}
 		]
 	},
-	"Division_3":{
+	{
+		"name":"Division_3",
 		"start_week":6,
 		"team_num":8,
 		"teams":[
@@ -771,10 +835,41 @@
 					"None"
 				],
 				"grounds":null
+			},
+			{
+				"num":8,
+				"name":"Wollaton 2",
+				"requirements":[
+					"A",
+					"A",
+					"A",
+					"A",
+					"None",
+					"A",
+					"A",
+					"None",
+					"None",
+					"A",
+					"X",
+					"A",
+					"None",
+					"None",
+					"A",
+					"None",
+					"None",
+					"A",
+					"A",
+					"X",
+					"A",
+					"A",
+					"None"
+				],
+				"grounds":null
 			}
 		]
 	},
-	"Division_4":{
+	{
+		"name":"Division_4",
 		"start_week":6,
 		"team_num":8,
 		"teams":[
@@ -987,10 +1082,41 @@
 					"None"
 				],
 				"grounds":null
+			},
+			{
+				"num":8,
+				"name":"Sherwood Casuals",
+				"requirements":[
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"X",
+					"X",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None"
+				],
+				"grounds":null
 			}
 		]
 	},
-	"Division_5":{
+	{
+		"name":"Division_5",
 		"start_week":6,
 		"team_num":8,
 		"teams":[
@@ -1203,10 +1329,41 @@
 					"None"
 				],
 				"grounds":null
+			},
+			{
+				"num":8,
+				"name":"Sutton Bonington",
+				"requirements":[
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None"
+				],
+				"grounds":null
 			}
 		]
 	},
-	"Division_6":{
+	{
+		"name":"Division_6",
 		"start_week":6,
 		"team_num":8,
 		"teams":[
@@ -1419,10 +1576,41 @@
 					"None"
 				],
 				"grounds":null
+			},
+			{
+				"num":8,
+				"name":"West Indian Cavs",
+				"requirements":[
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None"
+				],
+				"grounds":null
 			}
 		]
 	},
-	"Division_7":{
+	{
+		"name":"Division_7",
 		"start_week":6,
 		"team_num":8,
 		"teams":[
@@ -1635,8 +1823,39 @@
 					"None"
 				],
 				"grounds":null
+			},
+			{
+				"num":8,
+				"name":"BYE",
+				"requirements":[
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None",
+					"None"
+				],
+				"grounds":null
 			}
 		]
 	},
+	],
 	"file_parsed":true
 }

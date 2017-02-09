@@ -14,6 +14,7 @@ namespace TimeTableCalculator
 		public static int totalWeeks;
 		public static DateTime startWeek;
 		public static DateTime[] bankHolidays;
+		public static Division[] divisions;
 
 		public static DateTime ConvertDate( string stringDate )
 		{
@@ -40,10 +41,20 @@ namespace TimeTableCalculator
 			{
 				bankHolidays[i] = ConvertDate(JSONObject.bank_hols[i]);
 			}
+			
 			// Cerate object for first division
-			Division div1 = new Division(JSONObject.Division_1);
-			div1.roundRobbin();
-			div1.validateSolution();
+			//Division div1 = new Division(JSONObject.Division_1);
+			//div1.roundRobbin();
+			//div1.validateSolution();
+
+			divisions = new Division[JSONObject.divisions.Count];
+			for(int i = 0; i < divisions.Length; i++)
+			{
+				divisions[i] = new Division(JSONObject.divisions[i]);
+				divisions[i].roundRobbin();
+				divisions[i].validateSolution();
+				Console.WriteLine();
+			}
 			Console.ReadKey();
 		}
 	}

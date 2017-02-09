@@ -49,12 +49,16 @@ else:
 			jsonFile.write('\n\t],\n')
 			break
 
+			
+
+jsonFile.write('\t"divisions":[\n')
 #loop to read data per division
 for name in sheetNames:
 	ws = wb[name] 
 	name = name.replace(" ", "_")
 	#open division object
-	jsonFile.write('\t"' + name + '":{\n')
+	jsonFile.write('\t{\n')
+	jsonFile.write('\t\t"name":"' + name + '",\n')
 	
 	#find first week for division
 	for i in range(1, totalWeeks):
@@ -97,7 +101,7 @@ for name in sheetNames:
 				
 	jsonFile.write('\t\t\t}')
 	
-	for i in range(2, numOfTeams):
+	for i in range(2, numOfTeams+1):
 		jsonFile.write(',\n\t\t\t{\n')
 		jsonFile.write('\t\t\t\t"num":' + str(i) + ',\n')
 		jsonFile.write('\t\t\t\t"name":"' + ws[str(unichr(ord(teamInfoZeroIndex)+1)) + str(i+1)].value + '",\n') 
@@ -118,6 +122,8 @@ for name in sheetNames:
 	#close division object
 	jsonFile.write('\t},\n')
 #end of name in sheetNames for loop
+
+jsonFile.write('\t],\n')
 
 
 jsonFile.write('\t"file_parsed":true\n')
