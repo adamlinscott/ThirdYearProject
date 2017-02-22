@@ -53,6 +53,7 @@ namespace TimeTableCalculator
 				divisions[i] = new Division(JSONObject.divisions[i]);
 				divisions[i].roundRobbin();
 				divisions[i].validateSolution();
+				divisions[i].printTable();
 				Console.WriteLine();
 			}
 			Console.ReadKey();
