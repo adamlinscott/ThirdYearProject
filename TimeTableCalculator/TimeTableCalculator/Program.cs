@@ -41,21 +41,31 @@ namespace TimeTableCalculator
 			{
 				bankHolidays[i] = ConvertDate(JSONObject.bank_hols[i]);
 			}
-			
-			// Cerate object for first division
-			//Division div1 = new Division(JSONObject.Division_1);
-			//div1.roundRobbin();
-			//div1.validateSolution();
+
 
 			divisions = new Division[JSONObject.divisions.Count];
-			for(int i = 0; i < divisions.Length; i++)
+			divisions[0] = new Division(JSONObject.divisions[0]);
+			int bestRank = 999;
+			Team[] bestOrder = new Team[divisions[0].teams.Length];
+			for(int i = 0; i < 10; i++)
 			{
-				divisions[i] = new Division(JSONObject.divisions[i]);
-				divisions[i].roundRobbin();
-				divisions[i].validateSolution();
-				divisions[i].printTable();
+				divisions[0].roundRobbin();
+				int tempScore = divisions[0].validateSolution();
+				if(tempScore < bestRank)
+				{
+					bestRank = tempScore;
+					bestOrder = divisions[0].teams;
+				}
+				divisions[0].printTable();
+				divisions[0].printOrder();
+				divisions[0].rotateArray();
 				Console.WriteLine();
 			}
+
+			Console.WriteLine("best solution was valued " + bestRank);
+			divisions[0].teams = bestOrder;
+			divisions[0].printOrder();
+
 			Console.ReadKey();
 		}
 	}
