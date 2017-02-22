@@ -18,6 +18,7 @@ namespace TimeTableCalculator
 		bool[,] homeTable;
 		Team[,] fullOpponentTable;
 		bool[,] fullHomeTable;
+		int solutionRank;
 
 		public Division(dynamic divisionInfo)
 		{
@@ -44,6 +45,7 @@ namespace TimeTableCalculator
 
 		public void validateSolution()
 		{
+			solutionRank = 0;
 			// for each week that teams play
 			for (int week = 0; week < Program.totalWeeks; week++)
 			{
@@ -68,6 +70,7 @@ namespace TimeTableCalculator
 						else
 							Console.WriteLine(" Away");
 						Console.ResetColor();
+						solutionRank++;
 					}
 					else if (fullHomeTable[week, i])
 						Console.WriteLine("Team " + (i + 1) + " plays team " + fullOpponentTable[week, i].id + " at Home");
@@ -75,6 +78,7 @@ namespace TimeTableCalculator
 						Console.WriteLine("Team " + (i + 1) + " plays team " + fullOpponentTable[week, i].id + " Away");
 				}
 			}
+			Console.WriteLine("This solution has a score of " + solutionRank + " (lower is better)");
 		}
 
 
