@@ -19,7 +19,6 @@ namespace TimeTableCalculator
 			requirements = new string[Program.totalWeeks];
 			for(int i = 0; i < Program.totalWeeks; i++)
 			{
-				//note requirement
 				requirements[i] = teamInfo["requirements"][i];
 			}
 		}

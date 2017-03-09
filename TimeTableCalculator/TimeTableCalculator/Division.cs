@@ -20,6 +20,7 @@ namespace TimeTableCalculator
 		bool[,] fullHomeTable;
 		int solutionRank;
 		bool debug = false;
+		public int bestSolutionRank = 0;
 
 		public Division(dynamic divisionInfo)
 		{
@@ -30,7 +31,14 @@ namespace TimeTableCalculator
 			for(int i = 0; i < divisionInfo["teams"].Count; i++)
 			{
 				teams[i] = new Team(divisionInfo["teams"][i]);
+				for(int w = startWeek-1; w < startWeek + ((teams.Length - 1) * 2) - 1; w++)
+				{
+					if (teams[i].requirements[w].Contains("X"))
+						bestSolutionRank++;
+				}
 			}
+			if(debug)
+				Console.WriteLine(bestSolutionRank);
 			teamsInOrder = teams;
 		}
 
@@ -88,7 +96,6 @@ namespace TimeTableCalculator
 							Console.WriteLine("Team " + (i + 1) + " plays team " + fullOpponentTable[week, i].id + " Away");
 				}
 			}
-			Console.WriteLine("This solution has a score of " + solutionRank + " (lower is better)");
 			return solutionRank;
 		}
 
@@ -143,7 +150,10 @@ namespace TimeTableCalculator
 								((fullHomeTable[week, i] && !teamsInOrder[i].requirements[week].Contains("H")) ||
 								(!fullHomeTable[week, i] && !teamsInOrder[i].requirements[week].Contains("A"))))
 					{
-						Console.ForegroundColor = ConsoleColor.Red;
+						if (teamsInOrder[i].requirements[week].Contains("X"))
+							Console.ForegroundColor = ConsoleColor.Red;
+						else
+							Console.ForegroundColor = ConsoleColor.DarkYellow;
 						if (fullHomeTable[week, i])
 							Console.Write("H");
 						else

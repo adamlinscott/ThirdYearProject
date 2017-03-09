@@ -12,6 +12,7 @@ namespace TimeTableCalculator
 	class Program
 	{
 		public static int totalWeeks;
+		public static int divCount;
 		public static DateTime startWeek;
 		public static DateTime[] bankHolidays;
 		public static Division[] divisions;
@@ -42,31 +43,50 @@ namespace TimeTableCalculator
 				bankHolidays[i] = ConvertDate(JSONObject.bank_hols[i]);
 			}
 
-
-			divisions = new Division[JSONObject.divisions.Count];
-			divisions[0] = new Division(JSONObject.divisions[0]);
-			int bestRank = 999;
-			Team[] bestOrder = new Team[divisions[0].teams.Length];
-			for(int i = 0; i < 10; i++)
+			divCount = JSONObject.divisions.Count;
+			divisions = new Division[divCount];
+			for (int d = 0; d < divCount; d++)
 			{
-				divisions[0].roundRobbin();
-				int tempScore = divisions[0].validateSolution();
-				if(tempScore < bestRank)
+				divisions[d] = new Division(JSONObject.divisions[d]);
+			}
+
+			calculateSolutions();
+
+			Console.ReadKey();
+		}
+
+
+		public static void calculateSolutions()
+		{
+			for (int d = 0; d < divCount; d++)
+			{
+				int bestRank = 999;
+				Team[] bestOrder = new Team[divisions[d].teams.Length];
+				for (int i = 0; i < divisions[d].teams.Length; i++)
 				{
-					bestRank = tempScore;
-					bestOrder = divisions[0].teams;
+					divisions[d].roundRobbin();
+					int tempScore = divisions[d].validateSolution();
+					if (tempScore < bestRank)
+					{
+						bestRank = tempScore;
+						Array.Copy(divisions[d].teams, bestOrder, bestOrder.Length);
+						divisions[d].printTable();
+						divisions[d].printOrder();
+						Console.WriteLine("Solution has ranking of " + bestRank + " (lower is better)");
+						Console.WriteLine();
+					}
+					divisions[d].rotateArray();
 				}
-				divisions[0].printTable();
-				divisions[0].printOrder();
-				divisions[0].rotateArray();
+
+				Array.Copy(bestOrder, divisions[d].teams, bestOrder.Length);
+				if (divisions[d].bestSolutionRank == bestRank)
+					Console.ForegroundColor = ConsoleColor.Green;
+				Console.WriteLine("best solution was valued " + bestRank + " (best possible is " + divisions[d].bestSolutionRank + ")");
+				divisions[d].printOrder();
+				Console.ResetColor();
 				Console.WriteLine();
 			}
 
-			Console.WriteLine("best solution was valued " + bestRank);
-			divisions[0].teams = bestOrder;
-			divisions[0].printOrder();
-
-			Console.ReadKey();
 		}
 	}
 }
