@@ -55,38 +55,54 @@ namespace TimeTableCalculator
 			Console.ReadKey();
 		}
 
+		public static int quickFindBestRotation(int d)
+		{
+			int bestRank = 999;
+			Team[] bestOrder = new Team[divisions[d].teams.Length];
+			for (int i = 0; i < divisions[d].teams.Length; i++)
+			{
+				divisions[d].roundRobbin();
+				int tempScore = divisions[d].validateSolution();
+				if (tempScore < bestRank)
+				{
+					bestRank = tempScore;
+					Array.Copy(divisions[d].teams, bestOrder, bestOrder.Length);
+				}
+				divisions[d].rotateArray();
+			}
+
+			Array.Copy(bestOrder, divisions[d].teams, bestOrder.Length);
+			divisions[d].roundRobbin();
+
+			return bestRank;
+		}
 
 		public static void calculateSolutions()
 		{
 			for (int d = 0; d < divCount; d++)
 			{
-				int bestRank = 999;
-				Team[] bestOrder = new Team[divisions[d].teams.Length];
-				for (int i = 0; i < divisions[d].teams.Length; i++)
+				bool bestFound = false;
+				while (!bestFound)
 				{
-					divisions[d].roundRobbin();
-					int tempScore = divisions[d].validateSolution();
-					if (tempScore < bestRank)
+					int bestRank = quickFindBestRotation(d);
+				
+					if (divisions[d].bestSolutionRank == bestRank)
 					{
-						bestRank = tempScore;
-						Array.Copy(divisions[d].teams, bestOrder, bestOrder.Length);
-						divisions[d].printTable();
-						divisions[d].printOrder();
-						Console.WriteLine("Solution has ranking of " + bestRank + " (lower is better)");
-						Console.WriteLine();
+						Console.ForegroundColor = ConsoleColor.Green;
+						bestFound = true;
 					}
-					divisions[d].rotateArray();
+					Console.WriteLine("best solution was valued " + bestRank + " (best possible is " + divisions[d].bestSolutionRank + ")");
+					Console.ResetColor();
+					Console.WriteLine();
+					divisions[d].printOrder();
+					divisions[d].printTable();
+					Console.WriteLine();
+					Random rnd = new Random();
+					if (!bestFound)
+						divisions[d].fixFirstError();
+						//divisions[d].swapTeams(rnd.Next(divisions[d].teams.Length), rnd.Next(divisions[d].teams.Length));
 				}
-
-				Array.Copy(bestOrder, divisions[d].teams, bestOrder.Length);
-				if (divisions[d].bestSolutionRank == bestRank)
-					Console.ForegroundColor = ConsoleColor.Green;
-				Console.WriteLine("best solution was valued " + bestRank + " (best possible is " + divisions[d].bestSolutionRank + ")");
-				divisions[d].printOrder();
-				Console.ResetColor();
-				Console.WriteLine();
 			}
-
 		}
 	}
 }

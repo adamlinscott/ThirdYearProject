@@ -42,6 +42,48 @@ namespace TimeTableCalculator
 			teamsInOrder = teams;
 		}
 
+		public void fixFirstError()
+		{
+			// for each week that teams play
+			for (int week = 0; week < Program.totalWeeks; week++)
+			{
+				// for each team
+				for (int i = 0; i < teams.Length; i++)
+				{
+					if (fullOpponentTable[week, i] != null)
+					{
+						if ( ( !fullHomeTable[week, i] && teamsInOrder[i].requirements[week].Contains("H") ) ||
+								( fullHomeTable[week, i] && teamsInOrder[i].requirements[week].Contains("A") ) )
+						{ 
+							swapTeams(FindTeamPos(fullOpponentTable[week, i].id), FindTeamPos(i+1) );
+							//return;
+						}
+					}
+				}
+			}
+		}
+
+		int FindTeamPos(int id)
+		{
+			for(int i = 0; i < teams.Length; i++)
+			{
+				if (teams[i].id == id)
+					return i;
+			}
+
+			return -1;
+		}
+
+		public void swapTeams(int id1, int id2)
+		{
+			if(id1 >= 0 && id1 < teams.Length && id2 >= 0 && id2 < teams.Length)
+			{
+				Team tempTeam = teams[id1];
+				teams[id1] = teams[id2];
+				teams[id2] = tempTeam;
+			}
+		}
+
 		public void rotateArray()
 		{
 			Team tempTeam = teams[0];
@@ -76,15 +118,27 @@ namespace TimeTableCalculator
 								((fullHomeTable[week, i] && !teamsInOrder[i].requirements[week].Contains("H")) ||
 								(!fullHomeTable[week, i] && !teamsInOrder[i].requirements[week].Contains("A"))) )
 					{
-						if (debug)
+						if (teamsInOrder[i].requirements[week].Contains("X"))
 						{
-							Console.ForegroundColor = ConsoleColor.Red;
-							Console.Write("Team " + (i+1) + " cannot play team " + fullOpponentTable[week, i].id);
-							if (fullHomeTable[week, i])
-								Console.WriteLine(" at Home");
-							else
-								Console.WriteLine(" Away");
-							Console.ResetColor();
+							if (debug)
+							{
+								Console.ForegroundColor = ConsoleColor.Red;
+								Console.Write("Team " + (i + 1) + " cannot play");
+								Console.ResetColor();
+							}
+						}
+						else
+						{
+							if (debug)
+							{
+								Console.ForegroundColor = ConsoleColor.DarkYellow;
+								Console.Write("Team " + (i+1) + " cannot play team " + fullOpponentTable[week, i].id);
+								if (fullHomeTable[week, i])
+									Console.WriteLine(" at Home");
+								else
+									Console.WriteLine(" Away");
+								Console.ResetColor();
+							}
 						}
 						solutionRank++;
 					}
@@ -188,30 +242,38 @@ namespace TimeTableCalculator
 			// for each week that teams play
 			for (int week = 0; week < teams.Length*2 ; week++)
 			{
+				Team[] newWeekPairings = new Team[teams.Length];
+
+				for (int x=0; x < teams.Length; x+= 2)
+				{
+					newWeekPairings[teams[x].id - 1] = teams[x+1];
+					newWeekPairings[teams[x+1].id - 1] = teams[x];
+				}
+
 				Team[] weekPairings = new Team[teams.Length];
 				// for each pair of teams in week
-				for(int pair = 0; pair < teams.Length / 2; pair++)
+				for (int pair = 0; pair < teams.Length / 2; pair++)
 				{
-					weekPairings[teams[pair].id-1] = teams[teams.Length - pair-1];
-					weekPairings[teams[teams.Length - pair-1].id-1] = teams[pair];
+					weekPairings[teams[pair].id - 1] = teams[teams.Length - pair - 1];
+					weekPairings[teams[teams.Length - pair - 1].id - 1] = teams[pair];
 
-					if(week < teams.Length)
+					if (week < teams.Length)
 					{
 						homeTable[week, (pair + teams.Length - 1 + week) % teams.Length] = true;
 						homeTable[week, ((2 * teams.Length) - pair + week) % teams.Length] = false;
-					} 
+					}
 					else
 					{
 						homeTable[week, (pair + teams.Length - 1 + week) % teams.Length] = false;
 						homeTable[week, ((2 * teams.Length) - pair + week) % teams.Length] = true;
 					}
 				}
-				
+
 				// Put weekParings data into opponent table
-				for(int i = 0; i < weekPairings.Length; i++)
+				for (int i = 0; i < weekPairings.Length; i++)
 				{
 					if(weekPairings[i] != null)
-						opponentTable[week, teams[i].id - 1] = weekPairings[i];
+						opponentTable[week, i] = weekPairings[i];
 				}
 				rotateArray();
 			}
