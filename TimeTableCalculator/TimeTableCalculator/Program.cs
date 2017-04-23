@@ -85,7 +85,7 @@ namespace TimeTableCalculator
 				int attempt = 0;
 				Team[] bestDivOrder = new Team[divisions[d].teams.Length];
 				int bestDivRank = 999;
-				while (!bestFound && attempt < 1000)
+				while (!bestFound /*&& attempt < 1000*/)
 				{
 					attempt++;
 					int bestRank = quickFindBestRotation(d);
@@ -96,9 +96,12 @@ namespace TimeTableCalculator
 						Console.ForegroundColor = ConsoleColor.Green;
 						bestFound = true;
 					}
-					if (divisions[d].bestSolutionRank < bestDivRank)
+					if (bestRank < bestDivRank)
+					{
 						Array.Copy(divisions[d].teams, bestDivOrder, bestDivOrder.Length);
-					Console.WriteLine("best solution for attempt " + attempt + " was valued " + bestRank + " (best possible is " + divisions[d].bestSolutionRank + ")");
+						bestDivRank = bestRank;
+					}
+					Console.WriteLine("best solution for attempt " + attempt + " was valued " + bestRank + " (best possible is " + divisions[d].bestSolutionRank + ". Best found is " + bestDivRank + ")");
 					Console.ResetColor();
 					Console.WriteLine();
 					divisions[d].printOrder();
