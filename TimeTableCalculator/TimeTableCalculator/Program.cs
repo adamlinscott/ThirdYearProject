@@ -82,25 +82,31 @@ namespace TimeTableCalculator
 			for (int d = 0; d < divCount; d++)
 			{
 				bool bestFound = false;
-				while (!bestFound)
+				int attempt = 0;
+				Team[] bestDivOrder = new Team[divisions[d].teams.Length];
+				int bestDivRank = 999;
+				while (!bestFound && attempt < 1000)
 				{
+					attempt++;
 					int bestRank = quickFindBestRotation(d);
 				
 					if (divisions[d].bestSolutionRank == bestRank)
 					{
+						divisions[d].printTable();
 						Console.ForegroundColor = ConsoleColor.Green;
 						bestFound = true;
 					}
-					Console.WriteLine("best solution was valued " + bestRank + " (best possible is " + divisions[d].bestSolutionRank + ")");
+					if (divisions[d].bestSolutionRank < bestDivRank)
+						Array.Copy(divisions[d].teams, bestDivOrder, bestDivOrder.Length);
+					Console.WriteLine("best solution for attempt " + attempt + " was valued " + bestRank + " (best possible is " + divisions[d].bestSolutionRank + ")");
 					Console.ResetColor();
 					Console.WriteLine();
 					divisions[d].printOrder();
-					divisions[d].printTable();
 					Console.WriteLine();
 					Random rnd = new Random();
 					if (!bestFound)
-						divisions[d].fixFirstError();
-						//divisions[d].swapTeams(rnd.Next(divisions[d].teams.Length), rnd.Next(divisions[d].teams.Length));
+						//divisions[d].fixFirstError();
+						divisions[d].swapTeams(rnd.Next(divisions[d].teams.Length), rnd.Next(divisions[d].teams.Length));
 				}
 			}
 		}
