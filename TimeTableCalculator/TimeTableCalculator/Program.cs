@@ -85,7 +85,7 @@ namespace TimeTableCalculator
 				int attempt = 0;
 				Team[] bestDivOrder = new Team[divisions[d].teams.Length];
 				int bestDivRank = 999;
-				while (!bestFound /*&& attempt < 1000*/)
+				while (!bestFound && attempt < 10)
 				{
 					attempt++;
 					int bestRank = quickFindBestRotation(d);

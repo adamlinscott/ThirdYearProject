@@ -1,18 +1,13 @@
 ﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TimeTableCalculator
 {
 	class Division
 	{
+		//private vars
 		int startWeek;
 		int totalTeams;
 		string name;
-		public Team[] teams;
 		Team[] teamsInOrder;
 		Team[,] opponentTable;
 		bool[,] homeTable;
@@ -20,25 +15,37 @@ namespace TimeTableCalculator
 		bool[,] fullHomeTable;
 		int solutionRank;
 		bool debug = false;
+
+		//public vars
+		public Team[] teams;
 		public int bestSolutionRank = 0;
 
+		//Constructor
 		public Division(dynamic divisionInfo)
 		{
+			//set division variables
 			name = (string)divisionInfo["name"];
 			startWeek = (int) divisionInfo["start_week"];
 			totalTeams = (int) divisionInfo["team_num"];
 			teams = new Team[divisionInfo["teams"].Count];
+
 			for(int i = 0; i < divisionInfo["teams"].Count; i++)
 			{
+				//create array of Team objects representing the teams in the divisions
 				teams[i] = new Team(divisionInfo["teams"][i]);
+
+				//calculate how many days teams cannot play during the official timeframe
 				for(int w = startWeek-1; w < startWeek + ((teams.Length - 1) * 2) - 1; w++)
 				{
 					if (teams[i].requirements[w].Contains("X"))
 						bestSolutionRank++;
 				}
 			}
+
 			if(debug)
 				Console.WriteLine(bestSolutionRank);
+			
+			//copy teams array to keep the initial order (i.e. Team 1, Team 2, Team 2, etc...)
 			teamsInOrder = teams;
 		}
 
@@ -185,9 +192,7 @@ namespace TimeTableCalculator
 			{
 				//y axis label
 				Console.Write("Week ");
-				for (int i = 0; i < (Math.Pow(teams.Length * 2, 1 / 10)) - (Math.Pow(week + startWeek, 1 / 10)); i++)
-					Console.Write(" ");
-				if (week + startWeek < 10)
+				for (int i = (int) Math.Floor(Math.Log( week + 1, 10)); i <= (int) Math.Floor(Math.Log(Program.totalWeeks, 10)); i++)
 					Console.Write(" ");
 				Console.Write((week+1) + "||");
 
