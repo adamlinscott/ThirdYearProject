@@ -6,8 +6,8 @@ namespace TimeTableCalculator
 	{
 		//private vars
 		int startWeek;
-		int totalTeams;
-		string name;
+		public int totalTeams;
+		public string name;
 		Team[] teamsInOrder;
 		Team[,] opponentTable;
 		bool[,] homeTable;
